@@ -1,5 +1,4 @@
 /* aplication routes */
-const { auth } = require('./utils/auth')
 const userRoute = require('./api/user/user.routes')
 
 
