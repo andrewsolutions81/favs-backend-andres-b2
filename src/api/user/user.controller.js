@@ -20,33 +20,33 @@ module.exports = {
     }
   },
 
-  // /* login */
-  // async login(req, res) {
-  //   try {
-  //     const { email, password } = req.body
-  //     //validate email
-  //     const user = await User.find({ email })
-  //     if(!user){
-  //       throw new Error({message:`invalid credentials`})
-  //     }
-  //     //validate password
-  //     //compare 2 arguments 1 password and hashed password
-  //     const isValid = await bcrypt.compare( password, user.password)
+  /* login */
+  async login(req, res) {
+    try {
+      const { email, password } = req.body
+      //validate email
+      const user = await User.find({ email })
+      if(!user){
+        throw new Error({message:`invalid credentials`})
+      }
+      //validate password
+      //compare 2 arguments 1 password and hashed password
+      const isValid = await bcrypt.compare( password, user.password)
 
-  //     if(!isValid){
-  //       throw new error({message:`invalid credentials`})
-  //     }
+      if(!isValid){
+        throw new error({message:`invalid credentials`})
+      }
 
-  //     const token  = jwt.sign(
-  //       { id: student._id},
-  //       process.env.SECRET_KEY_JWT,
-  //       { expiresIn: 60 * 60 * 24}
-  //     )
+      const token  = jwt.sign(
+        { id: student._id},
+        process.env.SECRET_KEY_JWT,
+        { expiresIn: 60 * 60 * 24}
+      )
 
-  //     res.status(201).json({  message: "✅user logged in" })
+      res.status(201).json({  message: "✅user logged in" })
 
-  //   } catch (error) {
-  //     res.status(400).json({ message: `❌student could not login ${error}`})
-  //   }
-  // },
+    } catch (error) {
+      res.status(400).json({ message: `❌student could not login ${error}`})
+    }
+  },
 }
