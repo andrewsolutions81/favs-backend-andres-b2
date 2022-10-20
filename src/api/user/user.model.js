@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
   favList: [
     {
       type: String,
-      ref : 'favList'
+      ref : 'FavList'
     }
   ]
 },
