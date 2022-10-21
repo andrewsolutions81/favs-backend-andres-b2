@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Schema, model } = require('mongoose')
 
 const favListSchema = new mongoose.Schema(
   {
@@ -7,9 +8,9 @@ const favListSchema = new mongoose.Schema(
       required: true,
     },
     favListOwner: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
     favs: { type: mongoose.Schema.Types.ObjectId, ref: "Fav" },
   },
