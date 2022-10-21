@@ -14,7 +14,7 @@ module.exports = {
         process.env.SECRET_KEY_JWT,
         { expiresIn: 60 * 60 * 24}//one day
       )
-      res.status(201).json({ info: { token, userName, email }, message: "✅user created" })
+      res.status(201).json({ message: "✅user created", info: { token, userName, email } })
     } catch (error) {
       res.status(400).json({ message: `❌user could NOT be created ${error}`})
     }
@@ -24,8 +24,8 @@ module.exports = {
   async login(req, res) {
     try {
       const { email, password } = req.body
-      //validate email
-      const user = await User.find({ email })
+
+      const user = await User.findOne({ email })
       if(!user){
         throw new Error({message:`invalid credentials`})
       }
