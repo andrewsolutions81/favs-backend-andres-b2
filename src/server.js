@@ -10,9 +10,9 @@ const app = express();
 const port = process.env.PORT || 8888;
 database();
 
+app.use(cors());
 app.use(express.json());
 app.use(morgan('tiny'));
-app.use(cors());
 
 applicationRoutes(app)
 

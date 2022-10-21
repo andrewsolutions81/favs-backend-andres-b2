@@ -20,7 +20,7 @@ module.exports = {
     }
   },
 
-  /* login */
+  /* login create */
   async login(req, res) {
     try {
       const { email, password } = req.body

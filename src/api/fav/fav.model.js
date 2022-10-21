@@ -1,18 +1,21 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const favSchema = new mongoose.Schema({
-  favTitle: {
-    type: String,
-    required: true,
+const favSchema = new mongoose.Schema(
+  {
+    favTitle: {
+      type: String,
+      required: true,
+    },
+    favDescription: {
+      type: String,
+    },
+    link: {
+      type: String,
+    },
   },
-  favDescription:{
-    type: String,
-  },
-  link:{
-    type: String,
-  }
-}, { timestamps: true });
+  { timestamps: true }
+);
 
 const Fav = mongoose.model("fav", favSchema);
 
-module.exports = Fav
+module.exports = Fav;
