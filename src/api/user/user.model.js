@@ -12,12 +12,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      minLength: 6,
     },
     password: {
       type: String,
       required: true,
-      minLength: 4,
+      minLength: 2,
     },
     favList: [
       {

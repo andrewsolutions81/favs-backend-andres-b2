@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const favSchema = new mongoose.Schema(
   {
+    favListMember: {
+      ype: Schema.Types.ObjectId,
+      ref: "FavList",
+      required: true,
+    },
     favTitle: {
       type: String,
       required: true,
