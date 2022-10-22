@@ -5,7 +5,7 @@ module.exports ={
   async postFav(req, res) {
     try {
       const id = req.favList;
-      const favList = await User.findById(id);
+      const favList = await favList.findById(id);
       const favData = req.body;
       const newFav = await Fav.create({
         ...favData,
