@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+const { Schema, model } = require('mongoose')
 
 const favSchema = new mongoose.Schema(
   {
-    favListMember: {
-      ype: Schema.Types.ObjectId,
+    favOwner: {
+      type: Schema.Types.ObjectId,
       ref: "FavList",
       required: true,
     },

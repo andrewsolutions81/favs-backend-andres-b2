@@ -16,7 +16,7 @@ module.exports ={
       res.status(201).json({ message: `✅single fav created`, info: newFav });
     } catch (error) {
       res
-        .status(400)
+        .status(404)
         .json({ message: `❌ single fav could NOT be created ${error}` });
     }
   },

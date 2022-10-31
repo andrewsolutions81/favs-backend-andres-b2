@@ -18,7 +18,7 @@ module.exports = {
       )
       res.status(201).json({ message: "✅user created", info: { token, userName, email } })
     } catch (error) {
-      res.status(400).json({ message: `❌user could NOT be created ${error}`})
+      res.status(400).json({ message:"❌user could NOT be created", info:info.error})
     }
   },
 
@@ -31,8 +31,6 @@ module.exports = {
       if(!user){
         throw new Error(`invalid credentials email`)
       }
-      //validate password
-      //compare 2 arguments 1 password and hashed password
       const isValid = await bcrypt.compare( password, user.password)
 
       if(!isValid){
@@ -48,7 +46,7 @@ module.exports = {
       res.status(201).json({  message: "✅ user logged in", info: { token, email } })
 
     } catch (error) {
-      res.status(400).json({ message: `❌ user could not login ${error}`})
+      res.status(400).json({ message:"❌ user could not login", info:error.info})
     }
   },
 }
