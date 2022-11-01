@@ -1,11 +1,20 @@
 # Assesment Backend MIR Favs app Andres Berrio
 [FAVS API ](https://github.com/andrewsolutions81/favs-backend-andres-b2)
+
+| Route | HTTP Verb  | Middleware | Description |
+| ----- | ---------- | ---------- | ----------- |
+| /api/favs | GET | isAuthenticated() | Get all list of favorites |
+| /api/favs | POST | isAuthenticated() | Creates a new list of favorites |
+| /api/favs/:id | DELETE | isAuthenticated() | 	Deletes a list of favorites |
+| /auth/local/login | POST | isAuthenticated() | 	Login user by email/password |
+
 ## Questions
 ### 1 Indicate which are the parts of the following url: https://backend.mega-app.com.co:8080/api/articles/search?docid=1020&hl=en#dayone
 
 https://backend.mega-app.com.co:8080/ = url to a point on internet in port 8080
 api/articles/search = route
-?docid=1020&hl=en#dayone = query
+?docid=1020&hl=en = query
+#dayone = tag
 
 ### 2 Define what is a Web API, Restful and what are the statusCode 200-, 400-, 500-
 
@@ -22,10 +31,11 @@ The response status  works as response of HTTP
 ### 3 When we talk about CRUD, what does it mean?
 
 Crud stands for
-Create -> POST
-Read -> GET
-Update  -> PUT
-Delete  -> DELETE
+
+- Create -> POST
+- Read -> GET
+- Update  -> PUT
+- Delete  -> DELETE
 
 
 
