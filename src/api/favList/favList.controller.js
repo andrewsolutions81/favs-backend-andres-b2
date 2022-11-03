@@ -8,6 +8,7 @@ module.exports = {
       const id = req.user;
       const user = await User.findById(id);
       const favListData = req.body;
+
       const newFavlist = await FavList.create({
         ...favListData,
         favListOwner: id,
@@ -17,7 +18,7 @@ module.exports = {
       res.status(201).json({ message: "✅favlist created", info: newFavlist });
     } catch (error) {
       res
-        .status(404)
+        .status(400)
         .json({ message: `❌favlist could NOT be created`, info: error });
     }
   },
@@ -25,13 +26,19 @@ module.exports = {
   async getAllFavList(req, res) {
     try {
       const id = req.user;
-      const user = await User.findById(id);
-      const favsLists = user.favList;
-      res.status(200).json({ message: `✅ Fav Lists found:`, info: favsLists });
+      const user = await User.findById(id).populate("favList").select('-_id -password');
+
+      const favsLists = user.favList
+
+      if(favsLists === []){
+        res.message({ message: `❌ User has no Favs Lists`})
+      }
+
+      res.status(200).json({ message: `✅ Fav Lists found:`, info:favsLists });
     } catch (error) {
       res
         .status(404)
-        .json({ message: `❌ Favs Lists NOT found`, info: error.info });
+        .json({ message: "❌ Favs Lists NOT found", info:error.info });
     }
   },
 
@@ -41,7 +48,11 @@ module.exports = {
       const id = req.user;
       const favListId = req.params.id;
 
-      const singleFavList = await FavList.findById(favListId);
+      const singleFavList = await FavList.findById(favListId).populate('favs');
+
+      if(singleFavList === null){
+        res.message({ message: `❌ No Fav List yet`})
+      }
 
       res
         .status(200)

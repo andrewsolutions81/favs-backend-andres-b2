@@ -15,8 +15,7 @@ const UserSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
-      minLength: 2,
+      required: [true, "can't be blank"],
     },
     favList: [
       {
@@ -31,27 +30,28 @@ const UserSchema = new mongoose.Schema(
 UserSchema.pre("save", async function (next) {
   const user = this;
   try {
-    function ValidateEmail(mail)
-{
- if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(myForm.emailAddr.value))
-  {
-    return (true)
-  }
-    alert("You have entered an invalid email address!")
-    console.log("You have entered an invalid email address!")
-    return (false)
-}
+    function ValidateEmail(mail) {
+      if (
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+          myForm.emailAddr.value
+        )
+      ) {
+        return true;
+      }
+      alert("You have entered an invalid email address!");
+      console.log("You have entered an invalid email address!");
+      return false;
+    }
     if (!user.isModified("password")) {
       next();
     }
 
     const hash = await bcrypt.hash(user.password, 11);
-
   } catch (error) {
     next(error);
   }
 });
 
-const User = mongoose.model("user", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
 module.exports = User;

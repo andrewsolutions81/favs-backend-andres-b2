@@ -3,6 +3,17 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
+
+  async list(req, res){
+    try {
+      const users = await User.find().populate('favList').select('-_id -password')
+
+      res.status(201).json({ message: "✅users found", info: users })
+    } catch(error){
+      res.status(400).json({ message:"❌users could NOT be found", info:error.info})
+    }
+  },
+
 /* signup */
   async signup (req, res) {
     try {
@@ -18,14 +29,14 @@ module.exports = {
       )
       res.status(201).json({ message: "✅user created", info: { token, userName, email } })
     } catch (error) {
-      res.status(400).json({ message:"❌user could NOT be created", info:info.error})
+      res.status(400).json({ message:"❌user could NOT be created", info:error.message})
     }
   },
 
   /* login  */
   async login(req, res) {
     try {
-      const { email, password } = req.body
+      const { userName, email, password } = req.body
 
       const user = await User.findOne({ email })
       if(!user){
@@ -43,10 +54,10 @@ module.exports = {
         { expiresIn: 60 * 60 * 24}
       )
 
-      res.status(201).json({  message: "✅ user logged in", info: { token, email } })
+      res.status(201).json({  message: "✅ user logged in", info: { token, userName, email } })
 
     } catch (error) {
-      res.status(400).json({ message:"❌ user could not login", info:error.info})
+      res.status(400).json({ message:"❌ user could not login", info:error.message})
     }
   },
 }
